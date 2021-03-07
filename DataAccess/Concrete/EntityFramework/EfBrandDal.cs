@@ -34,7 +34,7 @@ namespace DataAccess.Concrete.EntityFramework
             throw new NotImplementedException();
         }
 
-        public Brand GetById(int carId)
+        public Brand GetById(int Id)
         {
             throw new NotImplementedException();
         }

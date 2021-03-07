@@ -12,6 +12,6 @@ namespace DataAccess.Abstract
         void Delete(T entity);
         List<T> GetAll(Expression<Func<T, bool>> filter = null); //Expression kullanabilmek için.
         T Get(Expression<Func<T, bool>> filter);
-        T GetById(int carId);
+        T GetById(int Id);
     }
 }

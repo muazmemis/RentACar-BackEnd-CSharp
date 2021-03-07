@@ -57,7 +57,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public Car GetById(int carId)
+        public Car GetById(int Id)
         {
             throw new NotImplementedException();
         }
