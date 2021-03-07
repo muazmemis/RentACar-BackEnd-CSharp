@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -15,7 +16,7 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>
             {
-                new Car {CarId = 1, BrandId = 1, ColorId = 1, DailyPrice = 100, ModelYear = 2010, Description = "Sports car"},
+                new Car {CarId = 1, BrandId = 1, ColorId = 1, DailyPrice = 100, ModelYear = 2010, Description = "Sports Car"},
                 new Car {CarId = 2, BrandId = 1, ColorId = 1, DailyPrice = 200, ModelYear = 2011, Description = "Company Car"},
                 new Car {CarId = 3, BrandId = 2, ColorId = 1, DailyPrice = 300, ModelYear = 2012, Description = "Convertible"},
                 new Car {CarId = 4, BrandId = 3, ColorId = 2, DailyPrice = 400, ModelYear = 2013, Description = "Coupe"},
@@ -44,6 +45,16 @@ namespace DataAccess.Concrete.InMemory
         {
             Car carToDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             _cars.Remove(carToDelete);
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Car> GetAll()
