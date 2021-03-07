@@ -1,65 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using Microsoft.EntityFrameworkCore;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, MyDatabaseContext>, ICarDal
     {
-        public void Add(Car entity)
+        public List<CarDetailDto> GetCarDetails()
         {
             using(MyDatabaseContext context = new MyDatabaseContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
+                var result = from c in context.Cars
+                            join b in context.Brands on c.BrandId equals b.BrandId
+                            join cl in context.Colors on c.ColorId equals cl.ColorId
+                            select new CarDetailDto
+                            {
+                                CarName = c.CarName, BrandName = b.BrandName, ColorName = cl.ColorName,
+                                DailyPrice = c.DailyPrice, ModelYear = c.ModelYear
+                            };
 
-        public void Update(Car entity)
-        {
-            using(MyDatabaseContext context = new MyDatabaseContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                return result.ToList();
             }
-        }
-
-        public void Delete(Car entity)
-        {
-            using(MyDatabaseContext context = new MyDatabaseContext())
-            {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using(MyDatabaseContext context = new MyDatabaseContext())
-            {
-                return filter == null ? context.Set<Car>().ToList() : context.Set<Car>().Where(filter).ToList();
-            }
-        }
-
-        public Car Get(Expression<Func<Car, bool>> filter)
-        {
-            using(MyDatabaseContext context = new MyDatabaseContext())
-            {
-                return context.Set<Car>().SingleOrDefault(filter);
-            }
-        }
-
-        public Car GetById(int Id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -66,7 +66,12 @@ namespace DataAccess.Concrete.InMemory
         {
             throw new NotImplementedException();
         }
-        
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetAllBrand(int brandId)
         {
             return _cars.Where(c => c.BrandId == brandId).ToList();
