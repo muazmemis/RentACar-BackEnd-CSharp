@@ -18,18 +18,27 @@ namespace ConsoleUI
             //CarsColorId(carManager);
             //CarsDailyPrice(carManager);
             //CarsGetAll(carManager);
-
             //BrandGetAll(brandManager);
+            GetCarDetails(carManager);
+        }
 
-            foreach (var car in carManager.GetCarDetails())
+        private static void GetCarDetails(CarManager carManager)
+        {
+            var result = carManager.GetCarDetails();
+
+            if(result.Success)
             {
-                Console.WriteLine($"CarName: {car.CarName}, BrandName: {car.BrandName}, ColorName: {car.ColorName}");
+                foreach(var car in result.Data)
+                {
+                    Console.WriteLine($"CarName: {car.CarName}, BrandName: {car.BrandName}, ColorName: {car.ColorName}");
+                }
             }
+
         }
 
         private static void BrandGetAll(BrandManager brandManager)
         {
-            foreach (var brand in brandManager.GetAll())
+            foreach(var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -39,11 +48,15 @@ namespace ConsoleUI
         {
             carManager.Add(new Car()
             {
-                CarName = "Mondeo", DailyPrice = 550, BrandId = 8, Description = "Dizel",
-                ColorId = 5, ModelYear = 2018
+                CarName = "Mondeo",
+                DailyPrice = 550,
+                BrandId = 8,
+                Description = "Dizel",
+                ColorId = 5,
+                ModelYear = 2018
             });
 
-            foreach (var car in carManager.GetAll())
+            foreach(var car in carManager.GetAll().Data)
             {
                 Console.WriteLine("Car Name: {0}", car.CarName);
             }
@@ -51,7 +64,7 @@ namespace ConsoleUI
 
         private static void CarsDailyPrice(CarManager carManager)
         {
-            foreach (var car in carManager.GetByDailyPrice(2, 400))
+            foreach(var car in carManager.GetByDailyPrice(2, 400).Data)
             {
                 Console.WriteLine(car.Description + " DailyPrice: " + car.DailyPrice);
             }
@@ -59,7 +72,7 @@ namespace ConsoleUI
 
         private static void CarsColorId(CarManager carManager)
         {
-            foreach (var car in carManager.GetCarsByColorId(1))
+            foreach(var car in carManager.GetCarsByColorId(1).Data)
             {
                 Console.WriteLine(car.Description + " ColorId: " + car.ColorId);
             }
@@ -67,7 +80,7 @@ namespace ConsoleUI
 
         private static void CarsBrandId(CarManager carManager)
         {
-            foreach (var car in carManager.GetCarsByBrandId(2))
+            foreach(var car in carManager.GetCarsByBrandId(2).Data)
             {
                 Console.WriteLine(car.Description + " BrandId: " + car.BrandId);
             }
