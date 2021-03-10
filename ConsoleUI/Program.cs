@@ -13,13 +13,53 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
+            UserManager userManager = new UserManager(new EfUserDal());
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
             //CarsBrandId(carManager);
             //CarsColorId(carManager);
             //CarsDailyPrice(carManager);
             //CarsGetAll(carManager);
             //BrandGetAll(brandManager);
-            GetCarDetails(carManager);
+            //GetCarDetails(carManager);
+
+            GetAllUsers(userManager);
+            GetAllCustomers(customerManager);
+            RentalAdd(rentalManager);
+        }
+
+        private static void RentalAdd(RentalManager rentalManager)
+        {
+            var result = rentalManager.Add(new Rental
+            {
+                CarId = 5, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = DateTime.Today
+            }); // ReturnDate= Null verilirse araç kirada mesajı verir.
+            Console.WriteLine(result.Message);
+        }
+
+        private static void GetAllCustomers(CustomerManager customerManager)
+        {
+            var result = customerManager.GetAllCustomer();
+            if (result.Success)
+            {
+                foreach (var customer in result.Data)
+                {
+                    Console.WriteLine(customer.CompanyName);
+                }
+            }
+        }
+
+        private static void GetAllUsers(UserManager userManager)
+        {
+            var result = userManager.GetAllUser();
+            if (result.Success)
+            {
+                foreach (var user in result.Data)
+                {
+                    Console.WriteLine(user.FirstName);
+                }
+            }
         }
 
         private static void GetCarDetails(CarManager carManager)
