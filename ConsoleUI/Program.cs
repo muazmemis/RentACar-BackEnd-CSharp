@@ -40,7 +40,7 @@ namespace ConsoleUI
 
         private static void GetAllCustomers(CustomerManager customerManager)
         {
-            var result = customerManager.GetAllCustomer();
+            var result = customerManager.GetAll();
             if (result.Success)
             {
                 foreach (var customer in result.Data)
@@ -52,7 +52,7 @@ namespace ConsoleUI
 
         private static void GetAllUsers(UserManager userManager)
         {
-            var result = userManager.GetAllUser();
+            var result = userManager.GetAll();
             if (result.Success)
             {
                 foreach (var user in result.Data)
