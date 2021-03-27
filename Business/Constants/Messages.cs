@@ -34,5 +34,12 @@
         public static string RentalUpdated = "Kiralama güncellendi.";
         public static string RentalDeleted = "Kiralama silindi.";
         public static string RentalInvalidation = "Araba kirada!";
+
+        public static string CarCountOfBrandError = "15 den fazla marka olamaz.";
+        public static string CarNameAlreadyExists = "Bu isim de zaten bir araba var.";
+        public static string BrandLimitExceded = "Marka limiti aşıldı.";
+
+        public static string CarImageLimitExceded = "Bir araba 5'den fazla resim eklenemez.";
+        public static string CarImageAdded = "Araba resmi eklendi.";
     }
 }
