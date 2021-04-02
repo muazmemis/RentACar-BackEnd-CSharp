@@ -62,13 +62,13 @@ namespace Core.Utilities.Helpers
             string fileExtension = fileInfo.Extension;
             string newPath = Guid.NewGuid().ToString() + fileExtension;
 
-            string result = $@"{newPath}";
+            string result = $@"CarImages\{newPath}";
             return result;
         }
 
         public static string CreateNewFilePathForLocalFolder(string pathForLocalFolder)
         {
-            string path = Environment.CurrentDirectory + @"\wwwroot\CarImages\" + pathForLocalFolder;
+            string path = Environment.CurrentDirectory + @"\wwwroot\" + pathForLocalFolder;
             return path;
         }
     }

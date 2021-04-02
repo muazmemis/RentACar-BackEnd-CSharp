@@ -42,7 +42,7 @@ namespace Business.Concrete
 
         public IResult Update(IFormFile file, CarImage carImage)
         {
-            carImage.ImagePath = FileHelper.Update(Environment.CurrentDirectory + @"\wwwroot\CarImages\"
+            carImage.ImagePath = FileHelper.Update(Environment.CurrentDirectory + @"\wwwroot\"
                 + _carImageDal.Get(c => c.Id == carImage.Id).ImagePath, file);
             carImage.CreationTime = DateTime.Now;
             _carImageDal.Update(carImage);
@@ -52,7 +52,7 @@ namespace Business.Concrete
 
         public IResult Delete(CarImage carImage)
         {
-            FileHelper.Delete(Environment.CurrentDirectory + @"\wwwroot\CarImages\" + carImage.ImagePath);
+            FileHelper.Delete(Environment.CurrentDirectory + @"\wwwroot\" + carImage.ImagePath);
             _carImageDal.Delete(carImage);
 
             return new SuccessResult();
