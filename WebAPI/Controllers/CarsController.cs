@@ -1,7 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
 
 namespace WebAPI.Controllers
 {
@@ -55,7 +54,6 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            //Thread.Sleep(1000);
             var result= _carService.GetAll();
             if(result.Success)
             {
@@ -126,6 +124,17 @@ namespace WebAPI.Controllers
         public IActionResult GetCarDetailsByColorId(int colorId)
         {
             var result = _carService.GetCarDetailsByColorId(colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcarlistbrandidcolorid")]
+        public IActionResult GetCarListBrandIdColorId(int brandId, int colorId)
+        {
+            var result = _carService.GetCarListBrandIdColorId(brandId, colorId);
             if (result.Success)
             {
                 return Ok(result);

@@ -10,19 +10,12 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal(), new BrandManager( new EfBrandDal()));
+            CarManager carManager = new CarManager(new EfCarDal(), new BrandManager(new EfBrandDal()));
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             UserManager userManager = new UserManager(new EfUserDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-
-            //CarsBrandId(carManager);
-            //CarsColorId(carManager);
-            //CarsDailyPrice(carManager);
-            //CarsGetAll(carManager);
-            //BrandGetAll(brandManager);
-            //GetCarDetails(carManager);
 
             GetAllUsers(userManager);
             GetAllCustomers(customerManager);
@@ -33,13 +26,21 @@ namespace ConsoleUI
         {
             var result = rentalManager.Add(new Rental
             {
-                CarId = 5, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = DateTime.Today
+                CarId = 5,
+                CustomerId = 2,
+                RentDate = DateTime.Now,
+                ReturnDate = DateTime.Today
             }); // ReturnDate= Null verilirse araç kirada mesajı verir.
             Console.WriteLine(result.Message);
         }
 
         private static void GetAllCustomers(CustomerManager customerManager)
         {
+            var abc = 22;
+            abc++;
+            abc -= 22;
+            Console.WriteLine("Result:" + abc);
+
             var result = customerManager.GetAll();
             if (result.Success)
             {
@@ -66,9 +67,9 @@ namespace ConsoleUI
         {
             var result = carManager.GetCarDetails();
 
-            if(result.Success)
+            if (result.Success)
             {
-                foreach(var car in result.Data)
+                foreach (var car in result.Data)
                 {
                     Console.WriteLine($"CarName: {car.CarName}, BrandName: {car.BrandName}, ColorName: {car.ColorName}");
                 }
@@ -78,7 +79,7 @@ namespace ConsoleUI
 
         private static void BrandGetAll(BrandManager brandManager)
         {
-            foreach(var brand in brandManager.GetAll().Data)
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -96,7 +97,7 @@ namespace ConsoleUI
                 ModelYear = 2018
             });
 
-            foreach(var car in carManager.GetAll().Data)
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine("Car Name: {0}", car.CarName);
             }
@@ -104,7 +105,7 @@ namespace ConsoleUI
 
         private static void CarsDailyPrice(CarManager carManager)
         {
-            foreach(var car in carManager.GetByDailyPrice(2, 400).Data)
+            foreach (var car in carManager.GetByDailyPrice(2, 400).Data)
             {
                 Console.WriteLine(car.Description + " DailyPrice: " + car.DailyPrice);
             }
@@ -112,7 +113,7 @@ namespace ConsoleUI
 
         private static void CarsColorId(CarManager carManager)
         {
-            foreach(var car in carManager.GetCarsByColorId(1).Data)
+            foreach (var car in carManager.GetCarsByColorId(1).Data)
             {
                 Console.WriteLine(car.Description + " ColorId: " + car.ColorId);
             }
@@ -120,7 +121,7 @@ namespace ConsoleUI
 
         private static void CarsBrandId(CarManager carManager)
         {
-            foreach(var car in carManager.GetCarsByBrandId(2).Data)
+            foreach (var car in carManager.GetCarsByBrandId(2).Data)
             {
                 Console.WriteLine(car.Description + " BrandId: " + car.BrandId);
             }
